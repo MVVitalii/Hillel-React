@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 const Card = ({ cardInfo }) => {
-  const { id, image, level, title, user, rating, students, modules, duration, isMyCource } = cardInfo;
+  const { id, image, level, title, user, rating, students, modules, duration, isMyCource, finishedModules } = cardInfo;
   return (
     <div className="card" key={id}>
       <div className="image__container">
@@ -22,12 +22,12 @@ const Card = ({ cardInfo }) => {
       {/* Якщо це карточка, яка відображає мої поточні курси  */}
       {isMyCource && (
         <div>
-          <progress value="50" max="100">
-            50%
-          </progress>
+          <progress value={(finishedModules / modules) * 100} max="100"></progress>
           <div className="card__info">
-            <p>5 / 10 Modules</p>
-            <div>50 %</div>
+            <p>
+              {finishedModules} / {modules} Modules
+            </p>
+            <div>{(finishedModules / modules) * 100} %</div>
           </div>
         </div>
       )}
