@@ -33,9 +33,9 @@ const Card = ({ cardInfo }) => {
       )}
 
       <div className="card__info">
-        <div>{students}</div>
-        <div>{modules}</div>
-        <div>{duration}</div>
+        <div>{students} Student</div>
+        <div>{modules} modules</div>
+        <div>{duration / 60} h</div>
       </div>
     </div>
   );
