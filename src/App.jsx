@@ -1,31 +1,23 @@
-import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './assets/pages/Home';
-import Users from './assets/pages/Users';
-import User from './assets/pages/User';
-import NotFoundPage from './assets/pages/NotFoundPage';
-import Layout from './components/Layout/Layout';
-import Posts from './assets/pages/Posts';
-
-// import Title from './components/Title/Title';
-// import Card from './components/Card/Card';
-// import Counter from './components/Counter/Counter';
-// import Album from './components/Album/Album';
+import { useContext, useState } from 'react';
+import { CounterContext } from './contexts/CounterContext';
 
 function App() {
+  const [value, setValue] = useState(0);
+
+  const { state, onIncrement, onDecrement, onIncrementByValue, onReset } = useContext(CounterContext);
+
   return (
     <>
       <div>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/users" element={<Users />}></Route>
-            <Route path="/posts" element={<Posts />}></Route>
-            <Route path="/users/:id" element={<User />}></Route>
-          </Route>
-
-          <Route path="*" element={<NotFoundPage />}></Route>
-        </Routes>
+        <div>
+          <input type="number" placeholder="Value" value={value} onChange={(e) => setValue(e.target.value)} />
+          <button onClick={() => onIncrementByValue(value)}>Increment By Value</button>
+        </div>
+        <h1>Counter: {state.count}</h1>
+        <button onClick={onIncrement}>Increment</button>
+        <button onClick={onDecrement}>Decrement</button>
+        <button onClick={onReset}>Reset</button>
       </div>
     </>
   );
