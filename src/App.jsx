@@ -1,25 +1,23 @@
+import { NavLink, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { useContext, useState } from 'react';
-import { CounterContext } from './contexts/CounterContext';
+import Home from './assets/pages/Home';
+import About from './assets/pages/About';
+import Products from './assets/pages/Products';
 
 function App() {
-  const [value, setValue] = useState(0);
-
-  const { state, onIncrement, onDecrement, onIncrementByValue, onReset } = useContext(CounterContext);
-
   return (
-    <>
-      <div>
-        <div>
-          <input type="number" placeholder="Value" value={value} onChange={(e) => setValue(e.target.value)} />
-          <button onClick={() => onIncrementByValue(value)}>Increment By Value</button>
-        </div>
-        <h1>Counter: {state.count}</h1>
-        <button onClick={onIncrement}>Increment</button>
-        <button onClick={onDecrement}>Decrement</button>
-        <button onClick={onReset}>Reset</button>
-      </div>
-    </>
+    <div className="app">
+      <nav>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/products">Products</NavLink>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<Products />} />
+      </Routes>
+    </div>
   );
 }
 
